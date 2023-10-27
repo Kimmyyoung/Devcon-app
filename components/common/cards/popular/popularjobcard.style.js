@@ -1,12 +1,14 @@
 import { StyleSheet } from "react-native";
 
 import { COLORS, FONT, SHADOWS, SIZES } from "../../../../constants";
+// backgroundColor: selectedJob === item.job_id ? COLORS.primary : "#FFF",
+// color: selectedJob === item.job_id ? COLORS.white : COLORS.primary,
 
 const styles = StyleSheet.create({
   container: (selectedJob, item) => ({
     width: 250,
     padding: SIZES.xLarge,
-    backgroundColor: selectedJob === item.job_id ? COLORS.primary : "#FFF",
+    backgroundColor: COLORS.primary,
     borderRadius: SIZES.medium,
     justifyContent: "space-between",
     ...SHADOWS.medium,
@@ -36,7 +38,7 @@ const styles = StyleSheet.create({
   jobName: (selectedJob, item) => ({
     fontSize: SIZES.large,
     fontFamily: FONT.medium,
-    color: selectedJob === item.job_id ? COLORS.white : COLORS.primary,
+    color: COLORS.white,
   }),
   infoWrapper: {
     flexDirection: "row",

@@ -3,9 +3,10 @@ import { Text, View, SafeAreaView,
 } from 'react-native';
 import { Stack, useRouter, useSearchParams } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { Company, JobAbout, JobFooter, JobTabs, ScreenHeaderBtn, Specifics, Specifics } from '../../components';
+import { Company, JobAbout, JobFooter, JobTabs, ScreenHeaderBtn, Specifics } from '../../components';
 import useFetch from '../../hook/useFetch';
-import { COLORS, SIZES } from '../../constants';
+import { COLORS, SIZES } from '../../constants/theme';
+import icons from '../../constants/icons';
 
 
 const tabs = ['About', 'Qualification', 'Resonsibilities'];
@@ -18,11 +19,14 @@ const JobDetails = () => {
   const { data, isLoading, error, refetch } = useFetch('job-details', {job_id : params.id });
 
   const [refreshing, setRefreshing] = useState(false);
-  const [ activeTab, setActiveTab ] = useState();
+  const [activeTab, setActiveTab] = useState(tabs[0]);
 
-  const onRefresh = ()=>{
-
-  }
+  const onRefresh = useCallback(()=>{
+    setRefreshing(true);
+    refetch();
+    setRefreshing(false);
+  });
+  
 
   const displayTabContent = () => {
     switch(activeTab){

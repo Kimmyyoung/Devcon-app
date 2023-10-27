@@ -20,7 +20,7 @@ const NearbyJobCard = ({ job, handleNavigate }) => {
 
       <View style={styles.textContainer}>
         <Text style={styles.jobName} numberOfLines={1}>
-          {item.job_title}
+          {job.job_title}
         </Text>
         <Text style={styles.jobType}>{job.job_employment_type}</Text>
       </View>

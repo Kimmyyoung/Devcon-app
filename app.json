@@ -8,9 +8,6 @@
       "expo-router"
     ],
     "name": "dev-community",
-    "slug": "dev-community",
-    "ios": {
-      "bundleIdentifier": "iphone14"
-    }
+    "slug": "dev-community"
   }
 }
