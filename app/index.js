@@ -3,10 +3,11 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
 import Login from '../screen/Login';
+import Register from '../screen/Register';
 
 export default function App(){
   return (
-    <Login />
+    <Register />
   )
 };
 
