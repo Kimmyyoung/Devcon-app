@@ -31,7 +31,7 @@ import { View } from 'react-native';
 
 const { brand, darkLight, primary } = Colors;
 
-const Login = () => {
+const Login = ({ navigation }) => {
   const [hidePassword, sethidePassword] = useState(true);
 
   return (
@@ -48,7 +48,7 @@ const Login = () => {
         <Formik
           initialValues={{ email:'', password: '' }}
           onSubmit={(values) => (
-            console.log(values)
+            navigation.navigate("Home")
           )}
         >
 
@@ -96,7 +96,7 @@ const Login = () => {
                 <ExtraText>
                 Don't have an account already? 
                 </ExtraText>
-                <TextLink>
+                <TextLink onPress={()=> navigation.navigate("Register")}>
                   <TextLinkContent>
                     Sign Up
                   </TextLinkContent>

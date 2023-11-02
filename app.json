@@ -7,6 +7,20 @@
     "plugins": [
       "expo-router"
     ],
+    "ios": {
+      "bundleIdentifier": "",
+      "supportsTablet": true
+    },
+    "android": {
+      "versionCode": 32,
+      "package": "",
+      "config": {
+        "googleSignIn": {
+          "apiKey": "AIzaSSyADCLdzTBaRTkSurzEMtWGr",
+          "certificateHash": "E3C2F31E0D060B49616998"
+        }
+      }
+    },
     "name": "dev-community",
     "slug": "dev-community"
   }

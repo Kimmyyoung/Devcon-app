@@ -35,7 +35,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 const { brand, darkLight, primary } = Colors;
 
-const Register = () => {
+const Register = ({ navigation }) => {
   const [hidePassword, sethidePassword] = useState(true);
   const [show, setShow] = useState(false);
   const [date, setDate] = useState(new Date(2000, 0, 1));
@@ -77,9 +77,10 @@ const Register = () => {
 
         <Formik
           initialValues={{ fullName: '', email:'', password: '', confirmPassword: '' }}
-          onSubmit={(values) => (
-            console.log(values)
-          )}
+          onSubmit={(values) => {
+            console.log(values);
+            navigation.navigate('Home');
+          }}
         >
 
           {({handleChange, handleBlur, handleSubmit, values})=>(
@@ -158,7 +159,7 @@ const Register = () => {
                 <ExtraText>
                 Already have an account? 
                 </ExtraText>
-                <TextLink>
+                <TextLink onPress={()=> navigation.navigate("Login")}>
                   <TextLinkContent>
                     Login
                   </TextLinkContent>

@@ -2,20 +2,20 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-import Login from '../screen/Login';
-import Register from '../screen/Register';
+//React navigation stack
+import RootStack from '../navigator/RootStack';
 
 export default function App(){
   return (
-    <Register />
+      <RootStack />
   )
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1, 
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1, 
+//     backgroundColor: '#fff',
+//     alignItems: 'center',
+//     justifyContent: 'center'
+//   }
+// });
