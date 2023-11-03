@@ -8,7 +8,7 @@
       "expo-router"
     ],
     "ios": {
-      "bundleIdentifier": "",
+      "bundleIdentifier": "com.devcon.kimmy",
       "supportsTablet": true
     },
     "android": {

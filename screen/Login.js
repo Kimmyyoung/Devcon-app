@@ -39,21 +39,27 @@ const Login = ({ navigation }) => {
   const [messageType, setMessageType] = useState();
 
 
-  const handleLogin = (credentials)=>{
+  const handleLogin = async (values)=>{
+    const { email, password } = values;
+
     const url = 'http://localhost:3000/api/login';
 
-    axios
-    .post(url, credentials)
-    .them((res) => {
-      const response = res.data;
-      
-      console.log(response);
+    try {
+      const res = await axios.post(url, { email, password});
 
+      console.log('login test!' , res.data);
 
-    })
-    .catch((err) => {
-      console.error(err.JSON)
-    })
+        if(res.data.status === 0) {
+          //to do : login 실패메시지
+          setMessage("Invalid Login Information")
+        }else {
+          //화면 이동
+          navigation.navigate('home');
+        }
+    }catch (err) {
+      console.log(err);
+    }
+
   };
 
   const handleMessage = (message, type = 'FAILED') => {
@@ -73,12 +79,10 @@ const Login = ({ navigation }) => {
 
         <Formik
           initialValues={{ email:'', password: '' }}
-          onSubmit={(values) => (
-            navigation.navigate("Home")
-          )}
+          onSubmit={handleLogin}
         >
 
-          {({handleChange, handleBlur, handleSubmit, values})=>(
+          {({handleChange, handleBlur, handleSubmit, handleLogin, values})=>(
             <StyledFormArea>
               <MyTextInput 
               label="Email" 
@@ -96,7 +100,7 @@ const Login = ({ navigation }) => {
                 icon="lock"
                 placeholder="*****"
                 placeholderTextColor={darkLight}
-                onChangeText={handleChange('password`')}
+                onChangeText={handleChange('password')}
                 onBlur={handleBlur('password')}
                 value={values.password}
                 secureTextEntry={hidePassword}
