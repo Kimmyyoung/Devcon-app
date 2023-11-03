@@ -118,6 +118,8 @@ export const MsgBox = styled.Text`
   text-align: center;
   font-size: 13px;
   margin-bottom: 5px;
+
+  color: ${props => props.type === 'SUCCESS' ? green : red};
 `;
 
 export const Line = styled.View`

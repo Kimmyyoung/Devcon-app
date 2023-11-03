@@ -29,16 +29,42 @@ import { StatusBar } from 'expo-status-bar';
 import { Formik } from 'formik';
 import { View } from 'react-native';
 
+import axios from 'axios';
+
 const { brand, darkLight, primary } = Colors;
 
 const Login = ({ navigation }) => {
   const [hidePassword, sethidePassword] = useState(true);
+  const [message, setMessage] = useState();
+  const [messageType, setMessageType] = useState();
+
+
+  const handleLogin = (credentials)=>{
+    const url = 'http://localhost:3000/api/login';
+
+    axios
+    .post(url, credentials)
+    .them((res) => {
+      const response = res.data;
+      
+      console.log(response);
+
+
+    })
+    .catch((err) => {
+      console.error(err.JSON)
+    })
+  };
+
+  const handleMessage = (message, type = 'FAILED') => {
+    setMessage(message);
+    setMessageType(type);
+  }
 
   return (
     <StyledContainer>
       <StatusBar style="dark" />
       <InnerContainer>
-        {/* <PageLogo resizemode="cover" source={('./../assets/splach.png')} /> */}
         <PageTitle>
           Login
         </PageTitle>
@@ -79,7 +105,7 @@ const Login = ({ navigation }) => {
                 sethidePassword={sethidePassword}
               />
 
-              <MsgBox>...</MsgBox>
+              <MsgBox type={messageType}>{message}</MsgBox>
 
                 <StyledButton onPress={handleSubmit}>
                   <ButtonText>Login</ButtonText>
