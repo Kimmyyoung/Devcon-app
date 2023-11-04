@@ -52,7 +52,18 @@ const Register = ({ navigation }) => {
   const showDatePicker = ()=>(
     setShow(true)
   );
+  
+  const handleSignup = async (values) => {
+    const { name , email, password } = values;
+    const url = 'http://localhost:3000/api/signup';
 
+    try {
+      const res = await axios.post(url, {name, email, password});
+
+
+    }
+
+  }
 
   return (
     <StyledContainer>
@@ -77,10 +88,7 @@ const Register = ({ navigation }) => {
 
         <Formik
           initialValues={{ fullName: '', email:'', password: '', confirmPassword: '' }}
-          onSubmit={(values) => {
-            console.log(values);
-            navigation.navigate('Home');
-          }}
+          onSubmit={handleSignup}
         >
 
           {({handleChange, handleBlur, handleSubmit, values})=>(

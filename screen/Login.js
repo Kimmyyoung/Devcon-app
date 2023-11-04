@@ -22,8 +22,8 @@ import {
   TextLinkContent
 } from './../styles/login';
 
-//icon
-import { Octicons, Ionicons, Fontisto } from '@expo/vector-icons';
+// To do : icon error 
+import { Octicons, Ionicons } from '@expo/vector-icons';
 
 import { StatusBar } from 'expo-status-bar';
 import { Formik } from 'formik';
@@ -41,31 +41,31 @@ const Login = ({ navigation }) => {
 
   const handleLogin = async (values)=>{
     const { email, password } = values;
-
     const url = 'http://localhost:3000/api/login';
-
     try {
       const res = await axios.post(url, { email, password});
+      const user = res.data;
+      const jwtToken = user.token;
 
-      console.log('login test!' , res.data);
-
-        if(res.data.status === 0) {
-          //to do : login 실패메시지
-          setMessage("Invalid Login Information")
-        }else {
-          //화면 이동
-          navigation.navigate('home');
-        }
+      if(user) {
+        navigation.navigate('Home')
+      }
+      // To do : store login token in session
+      // sessionStorage.setItem("userToken", jwtToken);
+      // dispatch({
+      //   type: "LOGIN",
+      //   payload: user,
+      // });
     }catch (err) {
+      setMessage('Invalid Login Information!');
       console.log(err);
     }
-
   };
 
-  const handleMessage = (message, type = 'FAILED') => {
-    setMessage(message);
-    setMessageType(type);
-  }
+  // const handleMessage = (message, type = 'FAILED') => {
+  //   setMessage(message);
+  //   setMessageType(type);
+  // }
 
   return (
     <StyledContainer>
@@ -118,7 +118,7 @@ const Login = ({ navigation }) => {
                 <Line />
 
                 <StyledButton google={true} onPress={handleSubmit}>
-                  <Fontisto name="google" color={primary} size={25} />
+                  {/* <Fontisto name="google" color={primary} size={25} /> */}
                   <ButtonText google={true}>SignIn with Google</ButtonText>
                 </StyledButton>
 
@@ -145,7 +145,7 @@ const MyTextInput = ({label, icon, isPassword, hidePassword, sethidePassword, ..
   return (
     <View>
       <LeftIcon>
-        <Octicons name={icon} size={30} color={brand} />
+        <Octicons name={icon} size={24} color={brand} />
       </LeftIcon>
       <StyledInputLabel>{label}</StyledInputLabel>
 
