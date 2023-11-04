@@ -31,6 +31,7 @@ import { View, TouchableOpacity } from 'react-native';
 
 //DateTimePicker
 import DateTimePicker from '@react-native-community/datetimepicker';
+import axios from 'axios';
 
 
 const { brand, darkLight, primary } = Colors;
@@ -41,6 +42,9 @@ const Register = ({ navigation }) => {
   const [date, setDate] = useState(new Date(2000, 0, 1));
   
   const [dob, setDob] = useState();
+
+  const [ message, setMessage ] = useState();
+  
 
   const onChange = (event, selectedDate)=>{
     const currentDate = selectedDate || date;
@@ -53,16 +57,27 @@ const Register = ({ navigation }) => {
     setShow(true)
   );
   
-  const handleSignup = async (values) => {
-    const { name , email, password } = values;
+  const handleSignup = (credentials) => {
     const url = 'http://localhost:3000/api/signup';
+    const {name, email, password, confirmPassword} = credentials;
+    const data = {name, email, password, confirmPassword};
 
-    try {
-      const res = await axios.post(url, {name, email, password});
 
-
-    }
-
+    axios.post(url, data)
+    .then((res)=>{
+      const result = res.data;
+      const {message, status, data} = result;
+      
+      if(!result) {
+        setMessage('Failed to Signup');
+      }else{
+        setMessage('Signup Success');
+        // navigation.navigate('Login')
+      }
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
   }
 
   return (
@@ -98,23 +113,10 @@ const Register = ({ navigation }) => {
               icon="person" 
               placeholder="First Name Last Name" 
               placeholderTextColor={darkLight}
-              onChangeText={handleChange('fullName')}
-              onBlur={handleBlur('fullName')}
-              value={values.fullName}
+              onChangeText={handleChange('name')}
+              onBlur={handleBlur('name')}
+              value={values.name}
               />
-
-              {/* <MyTextInput 
-              label="Date of Birth" 
-              icon="calendar" 
-              placeholder="YYYY-MM-DD" 
-              placeholderTextColor={darkLight}
-              onChangeText={handleChange('dateOfBirth')}
-              onBlur={handleBlur('dateOfBirth')}
-              value={dob ? dob.toDateString() : ''}
-              isDate={true}
-              editable={false}
-              showDatePicker={showDatePicker}
-              /> */}
 
                <MyTextInput 
               label="Email" 
@@ -155,7 +157,7 @@ const Register = ({ navigation }) => {
                 hidePassword={hidePassword}
                 sethidePassword={sethidePassword}
               />
-              <MsgBox>...</MsgBox>
+              <MsgBox>{message}</MsgBox>
 
                 <StyledButton onPress={handleSubmit}>
                   <ButtonText>Signup</ButtonText>
