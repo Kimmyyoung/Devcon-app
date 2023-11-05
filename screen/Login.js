@@ -25,6 +25,7 @@ import {
 // To do : icon error 
 import { Octicons, Ionicons } from '@expo/vector-icons';
 
+
 import { StatusBar } from 'expo-status-bar';
 import { Formik } from 'formik';
 import { View } from 'react-native';
@@ -50,22 +51,12 @@ const Login = ({ navigation }) => {
       if(user) {
         navigation.navigate('Home')
       }
-      // To do : store login token in session
-      // sessionStorage.setItem("userToken", jwtToken);
-      // dispatch({
-      //   type: "LOGIN",
-      //   payload: user,
-      // });
+      
     }catch (err) {
       setMessage('Invalid Login Information!');
       console.log(err);
     }
   };
-
-  // const handleMessage = (message, type = 'FAILED') => {
-  //   setMessage(message);
-  //   setMessageType(type);
-  // }
 
   return (
     <StyledContainer>
@@ -93,6 +84,7 @@ const Login = ({ navigation }) => {
               onBlur={handleBlur('email')}
               value={values.email}
               keyboardType="email-address"
+              autoCapitalize="none"
               />
 
               <MyTextInput
@@ -142,6 +134,7 @@ const Login = ({ navigation }) => {
 }
 
 const MyTextInput = ({label, icon, isPassword, hidePassword, sethidePassword, ...props}) => {
+  console.log(icon)
   return (
     <View>
       <LeftIcon>

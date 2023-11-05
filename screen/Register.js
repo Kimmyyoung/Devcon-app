@@ -23,11 +23,14 @@ import {
 } from './../styles/login';
 
 //icon
-import { Octicons, Ionicons } from '@expo/vector-icons';
+//import { Octicons, Ionicons } from '@expo/vector-icons';
+
+import Ionicons from '@expo/vector-icons/Ionicons';
+import Octicons from '@expo/vector-icons/Octicons';
 
 import { StatusBar } from 'expo-status-bar';
 import { Formik } from 'formik';
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, Alert } from 'react-native';
 
 //DateTimePicker
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -62,20 +65,25 @@ const Register = ({ navigation }) => {
     const {name, email, password, confirmPassword} = credentials;
     const data = {name, email, password, confirmPassword};
 
+    if(!name || !email || !password || !confirmPassword) return setMessage('Missing Information!');
 
+    if(password !== confirmPassword) return setMessage('Password does not match!');
+   
     axios.post(url, data)
     .then((res)=>{
       const result = res.data;
-      const {message, status, data} = result;
       
-      if(!result) {
+      if (!result) {
         setMessage('Failed to Signup');
-      }else{
+      } else {
         setMessage('Signup Success');
-        // navigation.navigate('Login')
+
       }
     })
     .catch((err)=>{
+      if(err.response.status === 400) setMessage('Email already registered');
+      else setMessage('Failed to Signup');
+    
       console.log(err);
     })
   }
@@ -116,6 +124,7 @@ const Register = ({ navigation }) => {
               onChangeText={handleChange('name')}
               onBlur={handleBlur('name')}
               value={values.name}
+              autoCapitalize="none"
               />
 
                <MyTextInput 
@@ -127,6 +136,7 @@ const Register = ({ navigation }) => {
               onBlur={handleBlur('email')}
               value={values.email}
               keyboardType="email-address"
+              autoCapitalize="none"
               />
 
             
