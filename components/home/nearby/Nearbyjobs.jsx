@@ -14,7 +14,7 @@ const Nearbyjobs = () => {
     query: 'React developer',
     num_pages: 1
   });
-  
+
   return (
     <View style={styles.container}>
       

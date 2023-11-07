@@ -50,22 +50,9 @@ const JobDetails = () => {
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
       <Stack.Screen options={{
         headerStyle: { backgroundColor : COLORS.lightWhite },
-        headerShowVisible: false,
-        headerBackVisible: false,
-        headerLeft: ()=>{
-          <ScreenHeaderBtn 
-            iconUrl={icons.left}
-            dimension="60%"
-            handlePress={()=>router.back()}
-          />          
-        },
-        headerRight: ()=>{
-          <ScreenHeaderBtn 
-            iconUrl={icons.share}
-            dimension="60%"
-          />          
-        },
-        headerTitle: ''
+        headerShowVisible: true,
+        headerBackVisible: true,
+        headerBackTitle: "Back"
       }}
       />
       {/* App Header Menu */}

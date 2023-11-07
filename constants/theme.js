@@ -1,7 +1,11 @@
+import DMRegular from "../assets/fonts/DMSans-Regular.ttf";
+import DMBold from "../assets/fonts/DMSans-Bold.ttf";
+import DMMedium from "../assets/fonts/DMSans-Medium.ttf";
+
 const COLORS = {
-  primary: "#312651",
-  secondary: "#444262",
-  tertiary: "#FF7754",
+  primary: "#192655",
+  secondary: "#3876BF",
+  tertiary: "#E1AA74",
 
   gray: "#83829A",
   gray2: "#C1C0C8",

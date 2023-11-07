@@ -15,20 +15,9 @@ const Stack = createStackNavigator();
 const RootStack = ()=>{
   return (
     <NavigationContainer independent={true}>
-      <Stack.Navigator
-        screenOptions={{
-          headerStyled : {
-            backgoundColor: 'transparent',
-          },
-          headerTintColor: Colors.tertiary,
-          headerTransparent: true,
-          headerTitle: '',
-          headerLeftContainerStyle: {
-            paddingLeft: 20
-          }
-        }}
-        initialRouteName='Login'
-      >
+      <Stack.Navigator  screenOptions={{
+        headerShown: false
+      }}>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen options={{ headerTintColor : Colors.primary }} name="Home" component={Home} />

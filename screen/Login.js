@@ -58,6 +58,7 @@ const Login = ({ navigation }) => {
     }
   };
 
+
   return (
     <StyledContainer>
       <StatusBar style="dark" />
@@ -134,7 +135,6 @@ const Login = ({ navigation }) => {
 }
 
 const MyTextInput = ({label, icon, isPassword, hidePassword, sethidePassword, ...props}) => {
-  console.log(icon)
   return (
     <View>
       <LeftIcon>
